@@ -1,8 +1,8 @@
 from PyQt5.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
-    QRect, QSize, QUrl, Qt)
+                          QRect, QSize, QUrl, Qt)
 from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-    QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
-    QRadialGradient)
+                         QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
+                         QRadialGradient)
 from PyQt5.QtWidgets import *
 from PyQt5 import QtWidgets
 import sys
@@ -79,6 +79,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
+
     # setupUi
 
     def retranslateUi(self, MainWindow):
@@ -98,11 +99,73 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
     # retranslateUi
 
+
 class mywindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(mywindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+
+
+
+data =   [
+        {
+            "name": "John Smith",
+            "birthday": "02.10.1990",
+            "height": 175,
+            "weight": 76.5,
+            "car": True,
+            "languages": ["C++", "Python"]
+        },
+        {
+            "name": "Alexey Alexeev",
+            "birthday": "05.06.1986",
+            "height": 197,
+            "weight": 101.2,
+            "car": False,
+            "languages": ["Pascal", "Delphi"]
+        },
+        {
+            "name": "Maria Ivanova",
+            "birthday": "28.08.1998",
+            "height": 165,
+            "weight": 56.1,
+            "car": True,
+            "languages": ["C#", "C++", "C"]
+        }
+    ]
+
+# for i in data:
+#     print(i)
+# print(data[1]['name'])
+#
+# data2 = ['asd','safd']
+# row = 0
+# col = 0
+#
+# for item in data2:
+#     cellinfo = QTableWidgetItem(item)
+#     Ui_MainWindow.tableWidget.setItem(row, col, cellinfo)
+#     col += 1
+#
+# row += 1
+
+
+# def print_data_to_table():
+#     row = 0
+#     for i in data:
+#         col = 0
+#
+#         for item in data:
+#             cellinfo = QTableWidgetItem(item)
+#             self.ui.tableWidget.setItem(row, col, cellinfo)
+#             col += 1
+#
+#         row += 1
+
+
+
 
 
 app = QtWidgets.QApplication([])
