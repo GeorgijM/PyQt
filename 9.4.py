@@ -186,6 +186,36 @@ class Ui_MainWindow(object):
     # retranslateUi
 
 
+
+data = [
+    {
+        "name": "John Smith",
+        "birthday": "02.10.1990",
+        "height": 175,
+        "weight": 76.5,
+        "car": True,
+        "languages": ["C++", "Python"]
+    },
+    {
+        "name": "Alexey Alexeev",
+        "birthday": "05.06.1986",
+        "height": 197,
+        "weight": 101.2,
+        "car": False,
+        "languages": ["Pascal", "Delphi"]
+    },
+    {
+        "name": "Maria Ivanova",
+        "birthday": "28.08.1998",
+        "height": 165,
+        "weight": 56.1,
+        "car": True,
+        "languages": ["C#", "C++", "C"]
+    }
+]
+
+
+
 class mywindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(mywindow, self).__init__()
@@ -193,35 +223,6 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
     def print_data_to_table(self):
-        global data
-
-        data = [
-            {
-                "name": "John Smith",
-                "birthday": "02.10.1990",
-                "height": 175,
-                "weight": 76.5,
-                "car": True,
-                "languages": ["C++", "Python"]
-            },
-            {
-                "name": "Alexey Alexeev",
-                "birthday": "05.06.1986",
-                "height": 197,
-                "weight": 101.2,
-                "car": False,
-                "languages": ["Pascal", "Delphi"]
-            },
-            {
-                "name": "Maria Ivanova",
-                "birthday": "28.08.1998",
-                "height": 165,
-                "weight": 56.1,
-                "car": True,
-                "languages": ["C#", "C++", "C"]
-            }
-        ]
-
         row = 0
         for person in data:
             col = 0
@@ -234,13 +235,14 @@ class mywindow(QtWidgets.QMainWindow):
 
             row += 1
 
-        for i in data:
-            print(i)
-            print(data[1]['name'])
+    for i in data:
+        print(i)
+        print(data[1]['name'])
 
     def add_data_to_combobox(self):
-
-        self.ui.comboBox.addItem("Программист")
+        for person in data:
+            person_name = person.get('name')
+            self.ui.comboBox.addItem(person_name)
 
 
 app = QtWidgets.QApplication([])
