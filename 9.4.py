@@ -1,6 +1,6 @@
 
 from PyQt5.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
-                          QRect, QSize, QUrl, Qt)
+                          QRect, QSize, QUrl, Qt, QDate)
 from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
                          QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
                          QRadialGradient)
@@ -255,7 +255,7 @@ data = [
         "height": 175,
         "weight": 76.5,
         "car": True,
-        "languages": ["C++", "Python"]
+        "languages": ["C#", "Python"]
     },
     {
         "name": "Alexey Alexeev",
@@ -263,7 +263,7 @@ data = [
         "height": 197,
         "weight": 101.2,
         "car": False,
-        "languages": ["Pascal", "Delphi"]
+        "languages": ["Java", "Python"]
     },
     {
         "name": "Maria Ivanova",
@@ -271,7 +271,7 @@ data = [
         "height": 165,
         "weight": 56.1,
         "car": True,
-        "languages": ["C#", "C++", "C"]
+        "languages": ["C#", "Java", "Python"]
     }
 ]
 
@@ -282,23 +282,26 @@ class mywindow(QtWidgets.QMainWindow):
         super(mywindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.row = 0
 
     def print_data_to_table(self):
-        row = 0
+        # row = 0
         for person in data:
             col = 0
 
             for key, value in person.items():
                 value = str(value)
                 cellinfo = QTableWidgetItem(value)
-                self.ui.tableWidget.setItem(row, col, cellinfo)
+                self.ui.tableWidget.setItem(self.row, col, cellinfo)
                 col += 1
 
-            row += 1
+            self.row += 1
 
-    for i in data:
-        print(i)
-        print(data[1]['name'])
+        # self.ui.tableWidget.setSortingEnabled(True)
+
+    # for i in data:
+    #     print(i)
+    #     print(data[1]['name'])
 
     def add_data_to_combobox(self):
         self.ui.comboBox.clear()
@@ -330,20 +333,20 @@ class mywindow(QtWidgets.QMainWindow):
 
     # @property
     def add_new_person_to_data(self):
-
+        # global new_person
 
         name = self.ui.lineEdit.text()
         birthday = self.ui.dateEdit.text()
         height = self.ui.spinBox.text()
         weight = self.ui.spinBox_2.text()
-        car = self.ui.checkBox.isChecked()
+        car = self.ui.checkBox_4.isChecked()
 
         languages_check_box =[]
-        if self.ui.checkBox_2.isChecked():
+        if self.ui.checkBox.isChecked():
             languages_check_box.append('Python')
-        if self.ui.checkBox_3.isChecked():
+        if self.ui.checkBox_2.isChecked():
             languages_check_box.extend(['C#'])
-        if self.ui.checkBox_4.isChecked():
+        if self.ui.checkBox_3.isChecked():
             languages_check_box += ['Java']
         languages = languages_check_box
 
@@ -362,13 +365,130 @@ class mywindow(QtWidgets.QMainWindow):
         # print(new_person)
         # print(self.ui.checkBox.isChecked())
         data.append(new_person)
-        print(data)
+        # print(data)
+        return(new_person)
 
 
 
+
+
+    def print_new_person_to_table(self):
+        # self.ui.tableWidget.clear()
+        self.ui.tableWidget.setRowCount(self.row+1)
+        new_person = application.add_new_person_to_data()
+
+        col = 0
+
+        for key, value in new_person.items():
+            value = str(value)
+            cellinfo = QTableWidgetItem(value)
+            self.ui.tableWidget.setItem(self.row, col, cellinfo)
+            col += 1
+
+        self.row += 1
+            # print(value)
+
+    #save data to the json file
     def save_data(self):
         self.ui.pushButton.clicked.connect(self.add_new_person_to_data)
         self.ui.pushButton.clicked.connect(self.add_data_to_combobox)
+        self.ui.pushButton.clicked.connect(self.print_new_person_to_table)
+
+
+    #adding person from combobox to the table
+    def plus_button_to_table(self):
+
+        name_combo = self.ui.comboBox.currentText()
+        print(name_combo)
+        element_index_combobox = self.ui.comboBox.currentIndex()
+        # if element_index_combobox > 0:
+        self.ui.comboBox.currentTextChanged.connect(self.show_selected_person_characteristics_in_widgets)
+
+    def show_selected_person_characteristics_in_widgets(self, selected_name_in_combobox):
+        element_index_combobox = self.ui.comboBox.currentIndex()
+
+        print(selected_name_in_combobox)
+        print(data)
+        print(element_index_combobox)
+
+        if element_index_combobox > 0:
+
+            for person in data:
+                if person['name'] == selected_name_in_combobox:
+                    birthday_combobox = person['birthday']
+                    # print(birthday_combobox)
+                    year = int(birthday_combobox[6:])
+                    # print(year)
+                    month = int(birthday_combobox[3:5])
+                    day = int(birthday_combobox[0:2])
+                    # print(month)
+                    # print(day)
+
+                    height_combobox = int(person['height'])
+                    # print(height_combobox)
+                    weight_combobox = int(person['weight'])
+                    # print(weight_combobox)
+                    car_combobox = person['car']
+                    languages_combobox = person['languages']
+
+
+                    self.ui.dateEdit.setDate(QDate(year, month, day))
+                    # self.ui.dateEdit.setDate(QDate(1900, 1, 11))
+
+                    self.ui.spinBox.setValue(height_combobox)
+                    self.ui.spinBox_2.setValue(weight_combobox)
+
+                    self.ui.checkBox_4.setChecked(car_combobox)
+
+                    self.ui.checkBox.setChecked(False)
+                    self.ui.checkBox_2.setChecked(False)
+                    self.ui.checkBox_3.setChecked(False)
+
+                    if 'Python' in languages_combobox:
+                        self.ui.checkBox.setChecked(True)
+                    if 'C#' in languages_combobox:
+                        self.ui.checkBox_2.setChecked(True)
+                    if 'Java' in languages_combobox:
+                        self.ui.checkBox_3.setChecked(True)
+
+
+
+
+
+
+        # name = self.ui.lineEdit.text()
+        # birthday = self.ui.dateEdit.text()
+        # height = self.ui.spinBox.text()
+        # weight = self.ui.spinBox_2.text()
+        # car = self.ui.checkBox_4.isChecked()
+        #
+        # languages_check_box = []
+        # if self.ui.checkBox.isChecked():
+        #     languages_check_box.append('Python')
+        # if self.ui.checkBox_2.isChecked():
+        #     languages_check_box.extend(['C#'])
+        # if self.ui.checkBox_3.isChecked():
+        #     languages_check_box += ['Java']
+        # languages = languages_check_box
+        #
+        # # print(languages)
+        #
+        # selected_person = {
+        #     "name": name,
+        #     "birthday": birthday,
+        #     "height": height,
+        #     "weight": weight,
+        #     "car": car,
+        #     "languages": languages
+        # }
+        # # print(new_person)
+        # # print(self.ui.checkBox.isChecked())
+        #
+        # print(selected_person)
+        #
+        #
+        # self.ui.toolButton.clicked.connect(self.print_new_person_to_table)
+        #
 
 
 
@@ -381,6 +501,10 @@ application.add_data_to_combobox()
 # application.birthday()
 # application.add_new_person_to_data()
 application.save_data()
+application.plus_button_to_table()
+# application.print_new_person_to_table()
+
+
 
 # print(new_person)
 
