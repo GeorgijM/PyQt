@@ -333,7 +333,7 @@ class mywindow(QtWidgets.QMainWindow):
 
     # @property
     def add_new_person_to_data(self):
-        # global new_person
+        global new_person
 
         name = self.ui.lineEdit.text()
         birthday = self.ui.dateEdit.text()
@@ -365,7 +365,7 @@ class mywindow(QtWidgets.QMainWindow):
         # print(new_person)
         # print(self.ui.checkBox.isChecked())
         data.append(new_person)
-        # print(data)
+        print(data)
         return(new_person)
 
 
@@ -375,7 +375,7 @@ class mywindow(QtWidgets.QMainWindow):
     def print_new_person_to_table(self):
         # self.ui.tableWidget.clear()
         self.ui.tableWidget.setRowCount(self.row+1)
-        new_person = application.add_new_person_to_data()
+        # new_person = application.add_new_person_to_data()
 
         col = 0
 
@@ -403,6 +403,8 @@ class mywindow(QtWidgets.QMainWindow):
         element_index_combobox = self.ui.comboBox.currentIndex()
         # if element_index_combobox > 0:
         self.ui.comboBox.currentTextChanged.connect(self.show_selected_person_characteristics_in_widgets)
+        # self.ui.comboBox.activated.connect(self.show_selected_person_characteristics_in_widgets)
+
 
     def show_selected_person_characteristics_in_widgets(self, selected_name_in_combobox):
         element_index_combobox = self.ui.comboBox.currentIndex()
@@ -495,7 +497,7 @@ class mywindow(QtWidgets.QMainWindow):
 app = QtWidgets.QApplication([])
 application = mywindow()
 
-application.print_data_to_table()
+# application.print_data_to_table()
 application.add_data_to_combobox()
 # application.name_qline_edit()
 # application.birthday()
