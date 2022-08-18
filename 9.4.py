@@ -1,4 +1,3 @@
-
 from PyQt5.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
                           QRect, QSize, QUrl, Qt, QDate)
 from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
@@ -208,6 +207,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
+
     # setupUi
 
     def retranslateUi(self, MainWindow):
@@ -245,9 +245,6 @@ class Ui_MainWindow(object):
     # retranslateUi
 
 
-
-
-
 data = [
     {
         "name": "John Smith",
@@ -274,7 +271,6 @@ data = [
         "languages": ["C#", "Java", "Python"]
     }
 ]
-
 
 
 class mywindow(QtWidgets.QMainWindow):
@@ -314,22 +310,21 @@ class mywindow(QtWidgets.QMainWindow):
     #
     #     self.ui.lineEdit.setText("Raul Sombrero")
     #     line_edit_name = self.ui.lineEdit.text()
-        # print(line_edit_name)
-        # self.ui.lineEdit.textChanged.connect(lambda: self.printw())
+    # print(line_edit_name)
+    # self.ui.lineEdit.textChanged.connect(lambda: self.printw())
 
     #
     # def printw(self):
     #     line_edit_name = self.ui.lineEdit.text()
     #     print(line_edit_name)
 
-
     #
     # def birthday(self):
     #
     #
     #     birthday = self.ui.dateEdit.text()
-        # print(birthday)
-        # self.ui.lineEdit.textChanged.connect(lambda: self.printw())
+    # print(birthday)
+    # self.ui.lineEdit.textChanged.connect(lambda: self.printw())
 
     # @property
     def add_new_person_to_data(self):
@@ -341,7 +336,7 @@ class mywindow(QtWidgets.QMainWindow):
         weight = self.ui.spinBox_2.text()
         car = self.ui.checkBox_4.isChecked()
 
-        languages_check_box =[]
+        languages_check_box = []
         if self.ui.checkBox.isChecked():
             languages_check_box.append('Python')
         if self.ui.checkBox_2.isChecked():
@@ -351,8 +346,6 @@ class mywindow(QtWidgets.QMainWindow):
         languages = languages_check_box
 
         # print(languages)
-
-
 
         new_person = {
             "name": name,
@@ -366,15 +359,11 @@ class mywindow(QtWidgets.QMainWindow):
         # print(self.ui.checkBox.isChecked())
         data.append(new_person)
         print(data)
-        return(new_person)
-
-
-
-
+        return (new_person)
 
     def print_new_person_to_table(self):
         # self.ui.tableWidget.clear()
-        self.ui.tableWidget.setRowCount(self.row+1)
+        self.ui.tableWidget.setRowCount(self.row + 1)
         # new_person = application.add_new_person_to_data()
 
         col = 0
@@ -386,7 +375,7 @@ class mywindow(QtWidgets.QMainWindow):
             col += 1
 
         self.row += 1
-            # print(value)
+        # print(value)
 
     def print_current_combobox_person_to_table(self):
         name_combo = self.ui.comboBox.currentText()
@@ -406,21 +395,16 @@ class mywindow(QtWidgets.QMainWindow):
         # print(value)
         # print('hello')
 
-
-    #save data to the json file
+    # save data to the json file
     def save_data(self):
         self.ui.pushButton.clicked.connect(self.add_new_person_to_data)
         self.ui.pushButton.clicked.connect(self.add_data_to_combobox)
         # self.ui.pushButton.clicked.connect(self.print_new_person_to_table)
 
-
-    #adding person from combobox to the table
+    # adding person from combobox to the table
     def plus_button_to_table(self):
 
         name_combo = self.ui.comboBox.currentText()
-
-
-
 
         element_index_combobox = self.ui.comboBox.currentIndex()
         # if element_index_combobox > 0:
@@ -429,7 +413,6 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.toolButton.clicked.connect(self.print_current_combobox_person_to_table)
 
         self.ui.toolButton_2.clicked.connect(self.delete_selected_person_from_table)
-
 
     def show_selected_person_characteristics_in_widgets(self, selected_name_in_combobox):
         # global selected_name_in_combobox
@@ -483,14 +466,13 @@ class mywindow(QtWidgets.QMainWindow):
                 if 'Java' in languages_combobox:
                     self.ui.checkBox_3.setChecked(True)
 
-
     def delete_selected_person_from_table(self):
-    #
-    # ints = [1, 3, 7, 5, 4, 3]
-    # item = 3
-    #
-    # indexes = [i for i, j in enumerate(ints) if j == item]
-    # print(f"Item {item} is found at index {indexes}")
+        #
+        # ints = [1, 3, 7, 5, 4, 3]
+        # item = 3
+        #
+        # indexes = [i for i, j in enumerate(ints) if j == item]
+        # print(f"Item {item} is found at index {indexes}")
         name_combo = self.ui.comboBox.currentText()
 
         names_list = []
@@ -506,62 +488,27 @@ class mywindow(QtWidgets.QMainWindow):
 
         print(name_indexes)
 
+        count = 0
         for i in name_indexes:
             if i == name_indexes[0] == 0:
                 self.ui.tableWidget.removeRow(0)
                 self.row -= 1
-                print('0')
-
-            if i == name_indexes[0]:
+                print('removeRow(0')
+            elif i == name_indexes[0]:
                 self.ui.tableWidget.removeRow(i)
                 self.row -= 1
-                print(i)
+                print('removeRow(i)', i)
             else:
-                self.ui.tableWidget.removeRow(i-1)
+                self.ui.tableWidget.removeRow(i - count)
                 self.row -= 1
-                print(i-1)
-
+                print('removeRow(i-1-count)', i - count)
+            count += 1
 
         #
         # for i in range(len(name_indexes)):
         #     for i in name_indexes:
         #
         #     self.ui.tableWidget.removeRow(i)
-
-
-
-
-
-    def delete_selected_person_from_table_2(self):
-        # QTableWidget.item (self, int row, int column)
-        # print(self.ui.QTableWidget.item(row, 1))
-
-        name_combo = self.ui.comboBox.currentText()
-        row_quantity = self.ui.tableWidget.rowCount()
-
-        #
-        # print(a)
-        # print(row_quantity)
-
-        # self.ui.tableWidget.removeRow(0)
-        z = 0
-        if self.row >= 0:
-            for i in range(self.row):
-                print(f'{row_quantity=}')
-                print(self.row)
-                # print(f'{i=}')
-                # print(f'{name_combo=}')
-                name_in_table = self.ui.tableWidget.item(z, 0).text()
-                if name_combo == name_in_table:
-                    print(f'{name_combo=}')
-                    self.ui.tableWidget.removeRow(z)
-
-                    self.row -=1
-                    z = i
-                    print(self.row)
-# print(name_in_table)
-
-
 
 
 
@@ -577,7 +524,6 @@ application.add_data_to_combobox()
 application.save_data()
 application.plus_button_to_table()
 # application.print_new_person_to_table()
-
 
 
 # print(new_person)
