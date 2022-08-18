@@ -390,7 +390,7 @@ class mywindow(QtWidgets.QMainWindow):
 
     def print_current_combobox_person_to_table(self):
         name_combo = self.ui.comboBox.currentText()
-        print(name_combo)
+        # print(name_combo)
         self.ui.tableWidget.setRowCount(self.row + 1)
 
         col = 0
@@ -403,8 +403,9 @@ class mywindow(QtWidgets.QMainWindow):
                     col += 1
 
         self.row += 1
-        print(value)
-        print('hello')
+        # print(value)
+        # print('hello')
+
 
     #save data to the json file
     def save_data(self):
@@ -426,6 +427,8 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.comboBox.currentTextChanged.connect(self.show_selected_person_characteristics_in_widgets)
         # self.ui.comboBox.activated.connect(self.show_selected_person_characteristics_in_widgets)
         self.ui.toolButton.clicked.connect(self.print_current_combobox_person_to_table)
+
+        self.ui.toolButton_2.clicked.connect(self.delete_selected_person_from_table)
 
 
     def show_selected_person_characteristics_in_widgets(self, selected_name_in_combobox):
@@ -481,96 +484,85 @@ class mywindow(QtWidgets.QMainWindow):
                     self.ui.checkBox_3.setChecked(True)
 
 
+    def delete_selected_person_from_table(self):
+    #
+    # ints = [1, 3, 7, 5, 4, 3]
+    # item = 3
+    #
+    # indexes = [i for i, j in enumerate(ints) if j == item]
+    # print(f"Item {item} is found at index {indexes}")
+        name_combo = self.ui.comboBox.currentText()
+
+        names_list = []
+        row_quantity = self.ui.tableWidget.rowCount()
+        for i in range(row_quantity):
+            name_in_table = self.ui.tableWidget.item(i, 0).text()
+            # names_list += name_in_table
+            print(name_in_table)
+            names_list.append(name_in_table)
+        print(names_list)
+
+        name_indexes = [i for i, j in enumerate(names_list) if j == name_combo]
+
+        print(name_indexes)
+
+        for i in name_indexes:
+            if i == name_indexes[0] == 0:
+                self.ui.tableWidget.removeRow(0)
+                self.row -= 1
+                print('0')
+
+            if i == name_indexes[0]:
+                self.ui.tableWidget.removeRow(i)
+                self.row -= 1
+                print(i)
+            else:
+                self.ui.tableWidget.removeRow(i-1)
+                self.row -= 1
+                print(i-1)
+
+
+        #
+        # for i in range(len(name_indexes)):
+        #     for i in name_indexes:
+        #
+        #     self.ui.tableWidget.removeRow(i)
 
 
 
 
 
+    def delete_selected_person_from_table_2(self):
+        # QTableWidget.item (self, int row, int column)
+        # print(self.ui.QTableWidget.item(row, 1))
+
+        name_combo = self.ui.comboBox.currentText()
+        row_quantity = self.ui.tableWidget.rowCount()
+
         #
-        # def show_selected_person_characteristics_in_widgets(self, selected_name_in_combobox):
-        #     element_index_combobox = self.ui.comboBox.currentIndex()
-        #
-        #     print(selected_name_in_combobox)
-        #     print(data)
-        #     print(element_index_combobox)
-        #
-        #     if element_index_combobox > 0:
-        #
-        #         for person in data:
-        #             if person['name'] == selected_name_in_combobox:
-        #                 birthday_combobox = person['birthday']
-        #                 # print(birthday_combobox)
-        #                 year = int(birthday_combobox[6:])
-        #                 # print(year)
-        #                 month = int(birthday_combobox[3:5])
-        #                 day = int(birthday_combobox[0:2])
-        #                 # print(month)
-        #                 # print(day)
-        #
-        #                 height_combobox = int(person['height'])
-        #                 # print(height_combobox)
-        #                 weight_combobox = int(person['weight'])
-        #                 # print(weight_combobox)
-        #                 car_combobox = person['car']
-        #                 languages_combobox = person['languages']
-        #
-        #                 self.ui.dateEdit.setDate(QDate(year, month, day))
-        #                 # self.ui.dateEdit.setDate(QDate(1900, 1, 11))
-        #
-        #                 self.ui.spinBox.setValue(height_combobox)
-        #                 self.ui.spinBox_2.setValue(weight_combobox)
-        #
-        #                 self.ui.checkBox_4.setChecked(car_combobox)
-        #
-        #                 self.ui.checkBox.setChecked(False)
-        #                 self.ui.checkBox_2.setChecked(False)
-        #                 self.ui.checkBox_3.setChecked(False)
-        #
-        #                 if 'Python' in languages_combobox:
-        #                     self.ui.checkBox.setChecked(True)
-        #                 if 'C#' in languages_combobox:
-        #                     self.ui.checkBox_2.setChecked(True)
-        #                 if 'Java' in languages_combobox:
-        #                     self.ui.checkBox_3.setChecked(True)
-        #
-        #
-        #
+        # print(a)
+        # print(row_quantity)
+
+        # self.ui.tableWidget.removeRow(0)
+        z = 0
+        if self.row >= 0:
+            for i in range(self.row):
+                print(f'{row_quantity=}')
+                print(self.row)
+                # print(f'{i=}')
+                # print(f'{name_combo=}')
+                name_in_table = self.ui.tableWidget.item(z, 0).text()
+                if name_combo == name_in_table:
+                    print(f'{name_combo=}')
+                    self.ui.tableWidget.removeRow(z)
+
+                    self.row -=1
+                    z = i
+                    print(self.row)
+# print(name_in_table)
 
 
 
-        # name = self.ui.lineEdit.text()
-        # birthday = self.ui.dateEdit.text()
-        # height = self.ui.spinBox.text()
-        # weight = self.ui.spinBox_2.text()
-        # car = self.ui.checkBox_4.isChecked()
-        #
-        # languages_check_box = []
-        # if self.ui.checkBox.isChecked():
-        #     languages_check_box.append('Python')
-        # if self.ui.checkBox_2.isChecked():
-        #     languages_check_box.extend(['C#'])
-        # if self.ui.checkBox_3.isChecked():
-        #     languages_check_box += ['Java']
-        # languages = languages_check_box
-        #
-        # # print(languages)
-        #
-        # selected_person = {
-        #     "name": name,
-        #     "birthday": birthday,
-        #     "height": height,
-        #     "weight": weight,
-        #     "car": car,
-        #     "languages": languages
-        # }
-        # # print(new_person)
-        # # print(self.ui.checkBox.isChecked())
-        #
-        # print(selected_person)
-        #
-        #
-        # self.ui.toolButton.clicked.connect(self.print_new_person_to_table)
-        #
 
 
 
