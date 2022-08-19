@@ -5,9 +5,20 @@ from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
                          QRadialGradient)
 from PyQt5.QtWidgets import *
 from PyQt5 import QtWidgets
+
+import json
 import sys
 
 
+# -*- coding: utf-8 -*-
+
+################################################################################
+## Form generated from reading UI file 'test2uCPCyQ.ui'
+##
+## Created by: Qt User Interface Compiler version 5.14.1
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 #
 # from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
 #     QRect, QSize, QUrl, Qt)
@@ -21,126 +32,122 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1111, 807)
+        MainWindow.resize(978, 694)
         MainWindow.setToolTipDuration(-1)
         self.action1 = QAction(MainWindow)
         self.action1.setObjectName(u"action1")
-        self.action2 = QAction(MainWindow)
-        self.action2.setObjectName(u"action2")
+        self.actionShow_all = QAction(MainWindow)
+        self.actionShow_all.setObjectName(u"actionShow_all")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.widget = QWidget(self.centralwidget)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(11, 70, 851, 521))
-        self.gridLayout = QGridLayout(self.widget)
+        self.horizontalLayout = QHBoxLayout(self.centralwidget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.comboBox = QComboBox(self.widget)
+        self.comboBox = QComboBox(self.centralwidget)
         self.comboBox.setObjectName(u"comboBox")
 
         self.gridLayout.addWidget(self.comboBox, 0, 0, 1, 2)
 
-        self.toolButton = QToolButton(self.widget)
+        self.toolButton = QToolButton(self.centralwidget)
         self.toolButton.setObjectName(u"toolButton")
 
         self.gridLayout.addWidget(self.toolButton, 0, 3, 1, 1)
 
-        self.toolButton_2 = QToolButton(self.widget)
+        self.toolButton_2 = QToolButton(self.centralwidget)
         self.toolButton_2.setObjectName(u"toolButton_2")
 
         self.gridLayout.addWidget(self.toolButton_2, 0, 4, 1, 1)
 
-        self.label_2 = QLabel(self.widget)
+        self.label_2 = QLabel(self.centralwidget)
         self.label_2.setObjectName(u"label_2")
 
         self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
 
-        self.label_3 = QLabel(self.widget)
+        self.label_3 = QLabel(self.centralwidget)
         self.label_3.setObjectName(u"label_3")
 
         self.gridLayout.addWidget(self.label_3, 3, 0, 1, 1)
 
-        self.dateEdit = QDateEdit(self.widget)
+        self.dateEdit = QDateEdit(self.centralwidget)
         self.dateEdit.setObjectName(u"dateEdit")
 
         self.gridLayout.addWidget(self.dateEdit, 4, 0, 1, 2)
 
-        self.label_5 = QLabel(self.widget)
+        self.label_5 = QLabel(self.centralwidget)
         self.label_5.setObjectName(u"label_5")
 
         self.gridLayout.addWidget(self.label_5, 5, 0, 1, 1)
 
-        self.spinBox = QSpinBox(self.widget)
+        self.spinBox = QSpinBox(self.centralwidget)
         self.spinBox.setObjectName(u"spinBox")
         self.spinBox.setMaximum(300)
-        self.spinBox.setValue(175)
+        self.spinBox.setValue(300)
 
         self.gridLayout.addWidget(self.spinBox, 6, 0, 1, 1)
 
-        self.label_6 = QLabel(self.widget)
+        self.label_6 = QLabel(self.centralwidget)
         self.label_6.setObjectName(u"label_6")
 
         self.gridLayout.addWidget(self.label_6, 7, 0, 1, 1)
 
-        self.spinBox_2 = QSpinBox(self.widget)
+        self.spinBox_2 = QSpinBox(self.centralwidget)
         self.spinBox_2.setObjectName(u"spinBox_2")
-        self.spinBox_2.setMaximum(300)
-        self.spinBox_2.setValue(75)
 
         self.gridLayout.addWidget(self.spinBox_2, 8, 0, 1, 1)
 
-        self.label_4 = QLabel(self.widget)
+        self.label_4 = QLabel(self.centralwidget)
         self.label_4.setObjectName(u"label_4")
 
         self.gridLayout.addWidget(self.label_4, 9, 0, 1, 1)
 
-        self.checkBox_4 = QCheckBox(self.widget)
+        self.checkBox_4 = QCheckBox(self.centralwidget)
         self.checkBox_4.setObjectName(u"checkBox_4")
 
         self.gridLayout.addWidget(self.checkBox_4, 9, 1, 1, 1)
 
-        self.label = QLabel(self.widget)
+        self.label = QLabel(self.centralwidget)
         self.label.setObjectName(u"label")
 
         self.gridLayout.addWidget(self.label, 10, 0, 1, 2)
 
-        self.checkBox = QCheckBox(self.widget)
+        self.checkBox = QCheckBox(self.centralwidget)
         self.checkBox.setObjectName(u"checkBox")
 
         self.gridLayout.addWidget(self.checkBox, 11, 0, 1, 2)
 
-        self.checkBox_2 = QCheckBox(self.widget)
+        self.checkBox_2 = QCheckBox(self.centralwidget)
         self.checkBox_2.setObjectName(u"checkBox_2")
 
         self.gridLayout.addWidget(self.checkBox_2, 12, 0, 1, 1)
 
-        self.checkBox_3 = QCheckBox(self.widget)
+        self.checkBox_3 = QCheckBox(self.centralwidget)
         self.checkBox_3.setObjectName(u"checkBox_3")
 
         self.gridLayout.addWidget(self.checkBox_3, 13, 0, 1, 2)
 
-        self.pushButton = QPushButton(self.widget)
+        self.pushButton = QPushButton(self.centralwidget)
         self.pushButton.setObjectName(u"pushButton")
 
         self.gridLayout.addWidget(self.pushButton, 14, 0, 1, 2)
 
-        self.pushButton_2 = QPushButton(self.widget)
+        self.pushButton_2 = QPushButton(self.centralwidget)
         self.pushButton_2.setObjectName(u"pushButton_2")
 
         self.gridLayout.addWidget(self.pushButton_2, 14, 2, 1, 2)
 
-        self.lineEdit = QLineEdit(self.widget)
+        self.lineEdit = QLineEdit(self.centralwidget)
         self.lineEdit.setObjectName(u"lineEdit")
         # self.lineEdit.setFocusPolicy(Qt.NoFocus)
         # self.lineEdit.setContextMenuPolicy(Qt.NoContextMenu)
         self.lineEdit.setMaxLength(32774)
-        self.lineEdit.setEchoMode(QLineEdit.Normal)
+        # self.lineEdit.setEchoMode(QLineEdit.NoEcho)
         self.lineEdit.setCursorPosition(0)
         self.lineEdit.setCursorMoveStyle(Qt.VisualMoveStyle)
 
         self.gridLayout.addWidget(self.lineEdit, 2, 0, 1, 4)
 
-        self.tableWidget = QTableWidget(self.widget)
+        self.tableWidget = QTableWidget(self.centralwidget)
         if (self.tableWidget.columnCount() < 6):
             self.tableWidget.setColumnCount(6)
         font = QFont()
@@ -173,10 +180,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.tableWidget, 0, 5, 15, 1)
 
+        self.horizontalLayout.addLayout(self.gridLayout)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1111, 26))
+        self.menubar.setGeometry(QRect(0, 0, 978, 26))
         self.menu = QMenu(self.menubar)
         self.menu.setObjectName(u"menu")
         MainWindow.setMenuBar(self.menubar)
@@ -198,11 +207,9 @@ class Ui_MainWindow(object):
         QWidget.setTabOrder(self.dateEdit, self.pushButton_2)
 
         self.menubar.addAction(self.menu.menuAction())
+        self.menu.addAction(self.actionShow_all)
         self.menu.addSeparator()
-        self.menu.addSeparator()
-        self.menu.addAction(self.action2)
         self.menu.addAction(self.action1)
-        self.menu.addSeparator()
 
         self.retranslateUi(MainWindow)
 
@@ -212,8 +219,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.action1.setText(QCoreApplication.translate("MainWindow", u"1", None))
-        self.action2.setText(QCoreApplication.translate("MainWindow", u"2", None))
+        self.action1.setText(QCoreApplication.translate("MainWindow", u"Reset data to default", None))
+        self.actionShow_all.setText(QCoreApplication.translate("MainWindow", u"Show all", None))
         self.toolButton.setText(QCoreApplication.translate("MainWindow", u"+", None))
         self.toolButton_2.setText(QCoreApplication.translate("MainWindow", u"-", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Name", None))
@@ -240,7 +247,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Car", None));
         ___qtablewidgetitem5 = self.tableWidget.horizontalHeaderItem(5)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Languages", None));
-        self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u041c\u0435\u043d\u044e", None))
+        self.menu.setTitle(QCoreApplication.translate("MainWindow", u"Menu", None))
         self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
 
@@ -272,6 +279,14 @@ data = [
     }
 ]
 
+default_data = data.copy()
+
+with open('data.json', 'r') as file_add_json:
+    data = json.load(file_add_json)
+
+
+print(data)
+
 
 class mywindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -280,16 +295,21 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.row = 0
 
+
     def print_data_to_table(self):
-        # row = 0
+
         for person in data:
+            self.ui.tableWidget.setRowCount(self.row + 1)
             col = 0
+            print(person)
 
             for key, value in person.items():
                 value = str(value)
                 cellinfo = QTableWidgetItem(value)
                 self.ui.tableWidget.setItem(self.row, col, cellinfo)
                 col += 1
+
+
 
             self.row += 1
 
@@ -299,16 +319,29 @@ class mywindow(QtWidgets.QMainWindow):
     #     print(i)
     #     print(data[1]['name'])
 
+
     def add_data_to_combobox(self):
         self.ui.comboBox.clear()
         for person in data:
             person_name = person.get('name')
             self.ui.comboBox.addItem(person_name)
+        print('add_data_to_combobox was run')
+
+
+    def add_default_data_to_combobox(self):
+        self.ui.comboBox.clear()
+        # rows_deleted_quntity = len(data)
+        for person in default_data:
+            person_name = person.get('name')
+            self.ui.comboBox.addItem(person_name)
+        # self.row -= rows_deleted_quntity
+
+        print('add_default_data_to_combobox was run')
+
 
     def delete_data_from_combobox(self):
         current_index = self.ui.comboBox.currentIndex()
         self.ui.comboBox.removeItem(current_index)
-
 
     def add_new_person_to_data(self):
         global new_person
@@ -383,11 +416,11 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.add_new_person_to_data)
         self.ui.pushButton.clicked.connect(self.add_data_to_combobox)
         # self.ui.pushButton.clicked.connect(self.print_new_person_to_table)
+        self.ui.pushButton.clicked.connect(self.create_current_data_json_file)
 
         self.ui.pushButton_2.clicked.connect(self.delete_person_from_data)
-        self.ui.pushButton_2.clicked.connect(self. delete_data_from_combobox)
-
-
+        self.ui.pushButton_2.clicked.connect(self.delete_data_from_combobox)
+        self.ui.pushButton_2.clicked.connect(self.create_current_data_json_file)
 
     # adding person from combobox to the table
     def plus_minus_buttons_to_table(self):
@@ -498,17 +531,39 @@ class mywindow(QtWidgets.QMainWindow):
         #
         #     self.ui.tableWidget.removeRow(i)
 
-
     def delete_person_from_data(self):
         print(data)
         name_combo = self.ui.comboBox.currentText()
         for person in data:
-            if person['name']==name_combo:
+            if person['name'] == name_combo:
                 del data[data.index(person)]
 
         print(data)
 
+    def menu(self):
+        self.ui.action1.triggered.connect(self.create_default_json_file)
+        # self.ui.action1.triggered.connect(self.add_data_to_combobox)
+        self.ui.action1.triggered.connect(self.add_default_data_to_combobox)
 
+        self.ui.actionShow_all.triggered.connect(self.print_data_to_table)
+
+
+
+    def create_default_json_file(self):
+        with open('data.json', 'w') as file_json:
+            json.dump(default_data, file_json, indent=1)
+
+            # data = default_data.copy()
+
+
+            print('File with default data has been created.')
+            print(data)
+
+
+    def create_current_data_json_file(self):
+        with open('data.json', 'w') as file_json:
+            json.dump(data, file_json, indent=1)
+            print('File with updated data has been created.')
 
 
 app = QtWidgets.QApplication([])
@@ -523,6 +578,10 @@ application.save_delete_data_buttons()
 application.plus_minus_buttons_to_table()
 # application.print_new_person_to_table()
 
+application.print_data_to_table()
+
+
+application.menu()
 
 # print(new_person)
 
