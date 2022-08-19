@@ -305,28 +305,11 @@ class mywindow(QtWidgets.QMainWindow):
             person_name = person.get('name')
             self.ui.comboBox.addItem(person_name)
 
-    #
-    # def name_qline_edit(self):
-    #
-    #     self.ui.lineEdit.setText("Raul Sombrero")
-    #     line_edit_name = self.ui.lineEdit.text()
-    # print(line_edit_name)
-    # self.ui.lineEdit.textChanged.connect(lambda: self.printw())
+    def delete_data_from_combobox(self):
+        current_index = self.ui.comboBox.currentIndex()
+        self.ui.comboBox.removeItem(current_index)
 
-    #
-    # def printw(self):
-    #     line_edit_name = self.ui.lineEdit.text()
-    #     print(line_edit_name)
 
-    #
-    # def birthday(self):
-    #
-    #
-    #     birthday = self.ui.dateEdit.text()
-    # print(birthday)
-    # self.ui.lineEdit.textChanged.connect(lambda: self.printw())
-
-    # @property
     def add_new_person_to_data(self):
         global new_person
 
@@ -396,13 +379,18 @@ class mywindow(QtWidgets.QMainWindow):
         # print('hello')
 
     # save data to the json file
-    def save_data(self):
+    def save_delete_data_buttons(self):
         self.ui.pushButton.clicked.connect(self.add_new_person_to_data)
         self.ui.pushButton.clicked.connect(self.add_data_to_combobox)
         # self.ui.pushButton.clicked.connect(self.print_new_person_to_table)
 
+        self.ui.pushButton_2.clicked.connect(self.delete_person_from_data)
+        self.ui.pushButton_2.clicked.connect(self. delete_data_from_combobox)
+
+
+
     # adding person from combobox to the table
-    def plus_button_to_table(self):
+    def plus_minus_buttons_to_table(self):
 
         name_combo = self.ui.comboBox.currentText()
 
@@ -480,28 +468,28 @@ class mywindow(QtWidgets.QMainWindow):
         for i in range(row_quantity):
             name_in_table = self.ui.tableWidget.item(i, 0).text()
             # names_list += name_in_table
-            print(name_in_table)
+            # print(name_in_table)
             names_list.append(name_in_table)
-        print(names_list)
+        # print(names_list)
 
         name_indexes = [i for i, j in enumerate(names_list) if j == name_combo]
 
-        print(name_indexes)
+        # print(name_indexes)
 
         count = 0
         for i in name_indexes:
             if i == name_indexes[0] == 0:
                 self.ui.tableWidget.removeRow(0)
                 self.row -= 1
-                print('removeRow(0')
+                # print('removeRow(0')
             elif i == name_indexes[0]:
                 self.ui.tableWidget.removeRow(i)
                 self.row -= 1
-                print('removeRow(i)', i)
+                # print('removeRow(i)', i)
             else:
                 self.ui.tableWidget.removeRow(i - count)
                 self.row -= 1
-                print('removeRow(i-1-count)', i - count)
+                # print('removeRow(i-1-count)', i - count)
             count += 1
 
         #
@@ -509,6 +497,16 @@ class mywindow(QtWidgets.QMainWindow):
         #     for i in name_indexes:
         #
         #     self.ui.tableWidget.removeRow(i)
+
+
+    def delete_person_from_data(self):
+        print(data)
+        name_combo = self.ui.comboBox.currentText()
+        for person in data:
+            if person['name']==name_combo:
+                del data[data.index(person)]
+
+        print(data)
 
 
 
@@ -521,8 +519,8 @@ application.add_data_to_combobox()
 # application.name_qline_edit()
 # application.birthday()
 # application.add_new_person_to_data()
-application.save_data()
-application.plus_button_to_table()
+application.save_delete_data_buttons()
+application.plus_minus_buttons_to_table()
 # application.print_new_person_to_table()
 
 
