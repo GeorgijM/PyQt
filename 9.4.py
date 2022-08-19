@@ -1,33 +1,12 @@
-from PyQt5.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
-                          QRect, QSize, QUrl, Qt, QDate)
-from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-                         QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
-                         QRadialGradient)
+from PyQt5.QtCore import (QCoreApplication, QMetaObject,
+                          QRect, Qt, QDate)
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import *
 from PyQt5 import QtWidgets
-
 import json
 import sys
 
-
-# -*- coding: utf-8 -*-
-
-################################################################################
-## Form generated from reading UI file 'test2uCPCyQ.ui'
-##
-## Created by: Qt User Interface Compiler version 5.14.1
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
-#
-# from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
-#     QRect, QSize, QUrl, Qt)
-# from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-#     QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
-#     QRadialGradient)
-# from PySide2.QtWidgets import *
-
-
+#PyQt options for window's dispaly
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if MainWindow.objectName():
@@ -251,7 +230,7 @@ class Ui_MainWindow(object):
         self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
 
-
+#person's charackteristics
 data = [
     {
         "name": "John Smith",
@@ -278,14 +257,12 @@ data = [
         "languages": ["C#", "Java", "Python"]
     }
 ]
-
+#for usage when restoring from menu button
 default_data = data.copy()
 
+#updating data if it was changed in previously session
 with open('data.json', 'r') as file_add_json:
     data = json.load(file_add_json)
-
-
-print(data)
 
 
 class mywindow(QtWidgets.QMainWindow):
@@ -295,29 +272,24 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.row = 0
 
-
+    #running when press 'Show all button' in menu
+    #display current data in tablewidget
     def print_data_to_table(self):
+        for i in range(self.row):
+            print(i)
+            self.ui.tableWidget.removeRow(0)
+            self.row -= 1
 
         for person in data:
             self.ui.tableWidget.setRowCount(self.row + 1)
             col = 0
             print(person)
-
             for key, value in person.items():
                 value = str(value)
                 cellinfo = QTableWidgetItem(value)
                 self.ui.tableWidget.setItem(self.row, col, cellinfo)
                 col += 1
-
-
-
             self.row += 1
-
-        # self.ui.tableWidget.setSortingEnabled(True)
-
-    # for i in data:
-    #     print(i)
-    #     print(data[1]['name'])
 
 
     def add_data_to_combobox(self):
@@ -327,22 +299,19 @@ class mywindow(QtWidgets.QMainWindow):
             self.ui.comboBox.addItem(person_name)
         print('add_data_to_combobox was run')
 
-
+    #using after menu 'Reset to default' pressed, because 'data'not updated
     def add_default_data_to_combobox(self):
         self.ui.comboBox.clear()
-        # rows_deleted_quntity = len(data)
         for person in default_data:
             person_name = person.get('name')
             self.ui.comboBox.addItem(person_name)
-        # self.row -= rows_deleted_quntity
-
         print('add_default_data_to_combobox was run')
-
 
     def delete_data_from_combobox(self):
         current_index = self.ui.comboBox.currentIndex()
         self.ui.comboBox.removeItem(current_index)
 
+    #for 'save' button
     def add_new_person_to_data(self):
         global new_person
 
@@ -361,8 +330,6 @@ class mywindow(QtWidgets.QMainWindow):
             languages_check_box += ['Java']
         languages = languages_check_box
 
-        # print(languages)
-
         new_person = {
             "name": name,
             "birthday": birthday,
@@ -371,31 +338,23 @@ class mywindow(QtWidgets.QMainWindow):
             "car": car,
             "languages": languages
         }
-        # print(new_person)
-        # print(self.ui.checkBox.isChecked())
+
         data.append(new_person)
         print(data)
         return (new_person)
 
     def print_new_person_to_table(self):
-        # self.ui.tableWidget.clear()
         self.ui.tableWidget.setRowCount(self.row + 1)
-        # new_person = application.add_new_person_to_data()
-
         col = 0
-
         for key, value in new_person.items():
             value = str(value)
             cellinfo = QTableWidgetItem(value)
             self.ui.tableWidget.setItem(self.row, col, cellinfo)
             col += 1
-
         self.row += 1
-        # print(value)
 
     def print_current_combobox_person_to_table(self):
         name_combo = self.ui.comboBox.currentText()
-        # print(name_combo)
         self.ui.tableWidget.setRowCount(self.row + 1)
 
         col = 0
@@ -406,70 +365,41 @@ class mywindow(QtWidgets.QMainWindow):
                     cellinfo = QTableWidgetItem(value)
                     self.ui.tableWidget.setItem(self.row, col, cellinfo)
                     col += 1
-
         self.row += 1
-        # print(value)
-        # print('hello')
 
     # save data to the json file
     def save_delete_data_buttons(self):
         self.ui.pushButton.clicked.connect(self.add_new_person_to_data)
         self.ui.pushButton.clicked.connect(self.add_data_to_combobox)
-        # self.ui.pushButton.clicked.connect(self.print_new_person_to_table)
         self.ui.pushButton.clicked.connect(self.create_current_data_json_file)
-
         self.ui.pushButton_2.clicked.connect(self.delete_person_from_data)
         self.ui.pushButton_2.clicked.connect(self.delete_data_from_combobox)
         self.ui.pushButton_2.clicked.connect(self.create_current_data_json_file)
 
-    # adding person from combobox to the table
+    # adding and removing selected person  in combobox from the table
     def plus_minus_buttons_to_table(self):
 
-        name_combo = self.ui.comboBox.currentText()
-
-        element_index_combobox = self.ui.comboBox.currentIndex()
-        # if element_index_combobox > 0:
+        # name_combo = self.ui.comboBox.currentText()
+        # element_index_combobox = self.ui.comboBox.currentIndex()
         self.ui.comboBox.currentTextChanged.connect(self.show_selected_person_characteristics_in_widgets)
-        # self.ui.comboBox.activated.connect(self.show_selected_person_characteristics_in_widgets)
         self.ui.toolButton.clicked.connect(self.print_current_combobox_person_to_table)
-
         self.ui.toolButton_2.clicked.connect(self.delete_selected_person_from_table)
 
     def show_selected_person_characteristics_in_widgets(self, selected_name_in_combobox):
-        # global selected_name_in_combobox
-        # element_index_combobox = self.ui.comboBox.currentIndex()
-        # element_text_combobox = self.ui.comboBox.currentText()
-
-        # print(selected_name_in_combobox)
-        # print(element_text_combobox)
-
-        # print(data)
-        # print(element_index_combobox)
-
-        # if element_index_combobox > 0:
-
         for person in data:
             if person['name'] == selected_name_in_combobox:
                 birthday_combobox = person['birthday']
-                # print(birthday_combobox)
                 year = int(birthday_combobox[6:])
-                # print(year)
                 month = int(birthday_combobox[3:5])
                 day = int(birthday_combobox[0:2])
-                # print(month)
-                # print(day)
-
                 height_combobox = int(person['height'])
-                # print(height_combobox)
                 weight_combobox = int(person['weight'])
-                # print(weight_combobox)
                 car_combobox = person['car']
                 languages_combobox = person['languages']
 
                 self.ui.lineEdit.setText(selected_name_in_combobox)
 
                 self.ui.dateEdit.setDate(QDate(year, month, day))
-                # self.ui.dateEdit.setDate(QDate(1900, 1, 11))
 
                 self.ui.spinBox.setValue(height_combobox)
                 self.ui.spinBox_2.setValue(weight_combobox)
@@ -495,19 +425,12 @@ class mywindow(QtWidgets.QMainWindow):
         # indexes = [i for i, j in enumerate(ints) if j == item]
         # print(f"Item {item} is found at index {indexes}")
         name_combo = self.ui.comboBox.currentText()
-
         names_list = []
         row_quantity = self.ui.tableWidget.rowCount()
         for i in range(row_quantity):
             name_in_table = self.ui.tableWidget.item(i, 0).text()
-            # names_list += name_in_table
-            # print(name_in_table)
             names_list.append(name_in_table)
-        # print(names_list)
-
         name_indexes = [i for i, j in enumerate(names_list) if j == name_combo]
-
-        # print(name_indexes)
 
         count = 0
         for i in name_indexes:
@@ -524,41 +447,29 @@ class mywindow(QtWidgets.QMainWindow):
                 self.row -= 1
                 # print('removeRow(i-1-count)', i - count)
             count += 1
-
-        #
-        # for i in range(len(name_indexes)):
-        #     for i in name_indexes:
-        #
-        #     self.ui.tableWidget.removeRow(i)
-
+    #when 'delete' button was pressed
     def delete_person_from_data(self):
         print(data)
         name_combo = self.ui.comboBox.currentText()
         for person in data:
             if person['name'] == name_combo:
                 del data[data.index(person)]
-
         print(data)
-
+    #menu actions 'Show all' and 'Reset data to default'
     def menu(self):
         self.ui.action1.triggered.connect(self.create_default_json_file)
-        # self.ui.action1.triggered.connect(self.add_data_to_combobox)
         self.ui.action1.triggered.connect(self.add_default_data_to_combobox)
-
         self.ui.actionShow_all.triggered.connect(self.print_data_to_table)
 
-
-
+    #creating json with default data (three persons)
     def create_default_json_file(self):
         with open('data.json', 'w') as file_json:
             json.dump(default_data, file_json, indent=1)
 
-            # data = default_data.copy()
-
-
-            print('File with default data has been created.')
+            # with open('data.json', 'r') as file_add_json:
+            #     data = json.load(file_add_json)
+            #     print('File with default data has been created.')
             print(data)
-
 
     def create_current_data_json_file(self):
         with open('data.json', 'w') as file_json:
@@ -569,21 +480,11 @@ class mywindow(QtWidgets.QMainWindow):
 app = QtWidgets.QApplication([])
 application = mywindow()
 
-# application.print_data_to_table()
 application.add_data_to_combobox()
-# application.name_qline_edit()
-# application.birthday()
-# application.add_new_person_to_data()
 application.save_delete_data_buttons()
 application.plus_minus_buttons_to_table()
-# application.print_new_person_to_table()
-
 application.print_data_to_table()
-
-
 application.menu()
-
-# print(new_person)
 
 application.show()
 sys.exit(app.exec())
