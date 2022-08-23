@@ -5,8 +5,9 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtWidgets
 import json
 import sys
+import os
 
-#PyQt options for window's dispaly
+# PyQt options for window's dispaly
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if MainWindow.objectName():
@@ -230,7 +231,8 @@ class Ui_MainWindow(object):
         self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
 
-#person's charackteristics
+
+# person's charackteristics
 data = [
     {
         "name": "John Smith",
@@ -257,10 +259,17 @@ data = [
         "languages": ["C#", "Java", "Python"]
     }
 ]
-#for usage when restoring from menu button
+# for usage when restoring from menu button
 default_data = data.copy()
 
-#updating data if it was changed in previously session
+#creating data.json file for the first launch
+if os.path.exists('data.json') == False:
+    with open('data.json', 'w') as file_json:
+        json.dump(data, file_json, indent=1)
+
+
+
+# updating data if it was changed in previously session
 with open('data.json', 'r') as file_add_json:
     data = json.load(file_add_json)
 
@@ -272,17 +281,18 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.row = 0
 
-    #running when press 'Show all button' in menu
-    #display current data in tablewidget
+    # running when press 'Show all button' in menu
+    # display current data in tablewidget
     def print_data_to_table(self):
         for i in range(self.row):
-            print(i)
             self.ui.tableWidget.removeRow(0)
             self.row -= 1
 
         for person in data:
             self.ui.tableWidget.setRowCount(self.row + 1)
             col = 0
+            print('print_data_to_table')
+            print(id(data))
             print(person)
             for key, value in person.items():
                 value = str(value)
@@ -291,7 +301,6 @@ class mywindow(QtWidgets.QMainWindow):
                 col += 1
             self.row += 1
 
-
     def add_data_to_combobox(self):
         self.ui.comboBox.clear()
         for person in data:
@@ -299,7 +308,7 @@ class mywindow(QtWidgets.QMainWindow):
             self.ui.comboBox.addItem(person_name)
         print('add_data_to_combobox was run')
 
-    #using after menu 'Reset to default' pressed, because 'data'not updated
+    # using after menu 'Reset to default' pressed, because 'data'not updated
     def add_default_data_to_combobox(self):
         self.ui.comboBox.clear()
         for person in default_data:
@@ -311,7 +320,7 @@ class mywindow(QtWidgets.QMainWindow):
         current_index = self.ui.comboBox.currentIndex()
         self.ui.comboBox.removeItem(current_index)
 
-    #for 'save' button
+    # for 'save' button
     def add_new_person_to_data(self):
         global new_person
 
@@ -447,7 +456,8 @@ class mywindow(QtWidgets.QMainWindow):
                 self.row -= 1
                 # print('removeRow(i-1-count)', i - count)
             count += 1
-    #when 'delete' button was pressed
+
+    # when 'delete' button was pressed
     def delete_person_from_data(self):
         print(data)
         name_combo = self.ui.comboBox.currentText()
@@ -455,21 +465,24 @@ class mywindow(QtWidgets.QMainWindow):
             if person['name'] == name_combo:
                 del data[data.index(person)]
         print(data)
-    #menu actions 'Show all' and 'Reset data to default'
+
+    # menu actions 'Show all' and 'Reset data to default'
     def menu(self):
         self.ui.action1.triggered.connect(self.create_default_json_file)
         self.ui.action1.triggered.connect(self.add_default_data_to_combobox)
+        self.ui.action1.triggered.connect(self.restore_data_to_default)
         self.ui.actionShow_all.triggered.connect(self.print_data_to_table)
 
-    #creating json with default data (three persons)
+    def restore_data_to_default(self):
+        global data
+        data = default_data.copy()
+        print('Data has been restored to default')
+        print(data)
+
+    # creating json with default data (three persons)
     def create_default_json_file(self):
         with open('data.json', 'w') as file_json:
             json.dump(default_data, file_json, indent=1)
-
-            # with open('data.json', 'r') as file_add_json:
-            #     data = json.load(file_add_json)
-            #     print('File with default data has been created.')
-            print(data)
 
     def create_current_data_json_file(self):
         with open('data.json', 'w') as file_json:
